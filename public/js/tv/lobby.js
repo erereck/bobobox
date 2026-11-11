@@ -43,7 +43,7 @@ export function Lobby({ s, catalog, joinUrl, send }) {
         <div class="jc-title">Escaneia e entra!</div>
         <div class="jc-qr">${joinUrl ? html`<${QrCode} text=${joinUrl} />` : null}</div>
         <div class="jc-or">ou acessa no celular</div>
-        <div class="jc-url">${host}</div>
+        <div class="jc-url" style=${`font-size:${Math.min(2.3, 40 / Math.max(1, host.length)).toFixed(2)}rem`}>${host}</div>
         <div class="jc-code-label">código da sala</div>
         <div class="jc-code">${s.room.code.split('').map((c, i) => html`<span style=${`--i:${i}`}>${c}</span>`)}</div>
         ${hide ? html`<button class="btn small alt" onMouseDown=${() => setPeek(true)} onMouseUp=${() => setPeek(false)} onMouseLeave=${() => setPeek(false)}>👁 Segura pra ver</button>` : null}

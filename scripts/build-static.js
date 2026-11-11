@@ -10,6 +10,7 @@
 //   npm run build
 
 import { cp, mkdir, rm, writeFile, readdir, stat } from 'node:fs/promises';
+import { statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -35,20 +36,30 @@ await mkdir(path.join(OUT, 'vendor'), { recursive: true });
 await cp(nm('htm', 'preact', 'standalone.module.js'), path.join(OUT, 'vendor', 'preact.js'));
 await cp(nm('qrcode-generator', 'dist', 'qrcode.mjs'), path.join(OUT, 'vendor', 'qrcode.mjs'));
 await cp(nm('peerjs', 'dist', 'peerjs.min.js'), path.join(OUT, 'vendor', 'peerjs.min.js'));
+await cp(nm('peerjs', 'dist', 'peerjs.min.js.map'), path.join(OUT, 'vendor', 'peerjs.min.js.map'));
 
 // 4) fontes
 for (const f of ['lilita-one', 'nunito', 'permanent-marker', 'creepster', 'bungee']) {
   await cp(nm('@fontsource', f, 'files'), path.join(OUT, 'fonts', f), {
     recursive: true,
-    filter: (src) => !/\.woff$/.test(src), // só woff2 (todo navegador moderno usa)
+    // só o que o CSS usa: woff2, alfabeto latino (cobre o português), estilo normal
+    filter: (src) => statSync(src).isDirectory() || /-latin-\d+-normal\.woff2$/.test(src),
   });
 }
 
 // 5) modo online
 const cfg = {
   mode: 'p2p',
-  // Servidor de sinalização/TURN próprios (opcional): BOBO_PEER_HOST, BOBO_ICE='[{"urls":"turn:..."}]'
-  ...(process.env.BOBO_PEER_HOST ? { peerHost: process.env.BOBO_PEER_HOST } : {}),
+  // Opcional: servidor PeerJS próprio (BOBO_PEER_HOST/PORT/PATH/SECURE) e ICE fixo (BOBO_ICE='[{"urls":"turn:..."}]').
+  // Na Vercel, prefira TURN pela função api/ice.js (credenciais temporárias; a chave fica secreta).
+  ...(process.env.BOBO_PEER_HOST
+    ? {
+        peerHost: process.env.BOBO_PEER_HOST,
+        peerPort: Number(process.env.BOBO_PEER_PORT) || 443,
+        peerPath: process.env.BOBO_PEER_PATH || '/',
+        peerSecure: process.env.BOBO_PEER_SECURE !== 'false',
+      }
+    : {}),
   ...(process.env.BOBO_ICE ? { iceServers: JSON.parse(process.env.BOBO_ICE) } : {}),
 };
 await writeFile(path.join(OUT, 'config.js'), `window.BOBO = ${JSON.stringify(cfg)};\n`);

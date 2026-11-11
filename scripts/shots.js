@@ -48,7 +48,7 @@ page.on('console', (m) => m.type() === 'error' && !/favicon|404/.test(m.text()) 
 const shot = (name) => page.screenshot({ path: path.join(OUT, `${name}.png`) });
 
 await page.goto(`http://localhost:${PORT}/tv`);
-await page.waitForTimeout(700);
+await page.waitForFunction(() => window.__bobo, null, { timeout: 60_000 }); // espera os módulos carregarem
 await shot('00-splash');
 await page.keyboard.press('Space');
 await page.waitForFunction(() => window.__bobo?.app.get().state?.room);

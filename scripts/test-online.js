@@ -61,7 +61,7 @@ const fail = async (msg) => {
 const tv = await browser.newPage({ viewport: { width: 1280, height: 720 } });
 watch(tv, 'tv');
 await tv.goto(`${base}/tv?timescale=0.3`);
-await tv.waitForTimeout(800);
+await tv.waitForFunction(() => window.__bobo, null, { timeout: 60_000 }); // espera os módulos carregarem
 await tv.keyboard.press('Space');
 try {
   await tv.waitForFunction(() => window.__bobo?.app.get().code, null, { timeout: 30_000 });

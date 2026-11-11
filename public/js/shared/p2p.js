@@ -27,20 +27,41 @@ function loadPeerJS() {
   return peerLib;
 }
 
-function peerOptions() {
-  const opts = { debug: 1 };
+// STUN públicos. (Os TURN que o PeerJS traz de fábrica não existem mais — por isso a lista é explícita.)
+const STUN = [{ urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302', 'stun:stun.cloudflare.com:3478'] }];
+
+/** Servidores ICE: do build (BOBO_ICE) > da função /api/ice da Vercel (TURN temporário) > só STUN. */
+let icePromise = null;
+function getIceServers() {
+  const cfg = window.BOBO ?? {};
+  if (Array.isArray(cfg.iceServers) && cfg.iceServers.length) return Promise.resolve(cfg.iceServers);
+  icePromise ??= (async () => {
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 5000);
+      const r = await fetch('/api/ice', { signal: ctrl.signal, cache: 'no-store' });
+      clearTimeout(t);
+      const j = r.ok ? await r.json() : null;
+      if (Array.isArray(j?.iceServers) && j.iceServers.length) return j.iceServers;
+    } catch {}
+    return STUN;
+  })();
+  return icePromise;
+}
+
+async function peerOptions() {
+  const opts = { debug: 1, config: { iceServers: await getIceServers() } };
   const cfg = window.BOBO ?? {};
   if (cfg.peerHost) Object.assign(opts, { host: cfg.peerHost, port: cfg.peerPort ?? 443, path: cfg.peerPath ?? '/', secure: cfg.peerSecure ?? true });
-  // Sem iceServers próprios, o PeerJS usa os padrões dele (STUN do Google + TURN do PeerJS).
-  if (Array.isArray(cfg.iceServers) && cfg.iceServers.length) opts.config = { iceServers: cfg.iceServers };
   return opts;
 }
 
 /** Abre um peer e espera ele registrar no servidor de sinalização. */
 async function openPeer(id) {
   const Peer = await loadPeerJS();
+  const opts = await peerOptions();
   return new Promise((resolve, reject) => {
-    const peer = id ? new Peer(id, peerOptions()) : new Peer(peerOptions());
+    const peer = id ? new Peer(id, opts) : new Peer(opts);
     const timer = setTimeout(() => {
       peer.destroy();
       reject(Object.assign(new Error('Sem resposta do servidor de conexão'), { type: 'timeout' }));
@@ -211,7 +232,7 @@ export function createPhoneSocket() {
         } catch {}
         reject(new Error(msg));
       };
-      const timer = setTimeout(() => fail('Não deu pra conectar na TV. Confere o código e se a TV está aberta.'), 15_000);
+      const timer = setTimeout(() => fail('Não deu pra conectar na TV. Confere o código e se a TV está aberta — se estiver no 4G, tenta pelo mesmo Wi-Fi da TV.'), 15_000);
       const onPeerError = (e) => {
         if (e.type === 'peer-unavailable') fail('Sala não encontrada. Confere o código na TV!');
         else if (!p.open) fail('Sem conexão com a internet.');
