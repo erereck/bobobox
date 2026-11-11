@@ -131,3 +131,8 @@ kbd { font-family: var(--body); background: #fff2; border: 1px solid #fff4; bord
 .wobble { animation: wobble 1.2s ease-in-out infinite; display: inline-block; }
 @keyframes wobble { 25% { transform: rotate(-10deg) scale(1.05); } 75% { transform: rotate(10deg) scale(0.97); } }
 .blank { display: inline-block; color: var(--gc, var(--pink)); letter-spacing: -0.05em; }
+
+/* Assinatura EriLab nas telas de entrada (TV e celular). */
+.studio-credit { display: block; font: 700 0.75rem/1.25 var(--body); letter-spacing: 0.055em; text-align: center; color: rgba(255,255,255,0.68); pointer-events: none; }
+.lobby-brand { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.join > .studio-credit { margin-top: -10px; }
