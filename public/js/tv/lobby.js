@@ -31,7 +31,7 @@ export function Lobby({ s, catalog, joinUrl, send }) {
 
   return html`<div class="lobby">
     <div class="lobby-top">
-      <${Logo} size=${1} />
+      <div class="lobby-brand"><${Logo} size=${1} /><small class="studio-credit">EriLab™ / Erick Luiz</small></div>
       <div class="lobby-tools">
         <button class="icon-btn" title="Configurações" onClick=${() => setSettings(true)}>⚙️</button>
         <button class="icon-btn" title="Tela cheia (F)" onClick=${toggleFullscreen}>⛶</button>
