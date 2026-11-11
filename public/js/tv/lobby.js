@@ -61,9 +61,9 @@ export function Lobby({ s, catalog, joinUrl, send }) {
               <div class="gc-name">MARATONA</div>
               <div class="gc-tag">Vários jogos seguidos, placar acumulado e um campeão no final</div>
               <div class="party-ctrl">
-                ${[3, 4, 5, 6].map((k) => html`<button class=${cls('chip', partyCount === k && 'on')} onClick=${() => setPartyCount(k)}>${k} jogos</button>`)}
+                ${[3, 4, 5, 6].map((k) => html`<button class=${cls('chip', partyCount === k && 'on')} onClick=${() => setPartyCount(k)}>${k}</button>`)}
+                <button class="btn" disabled=${n < 2} onClick=${() => send('party', { count: partyCount })}>JOGAR ${partyCount} JOGOS ▶</button>
               </div>
-              <button class="btn" disabled=${n < 2} onClick=${() => send('party', { count: partyCount })}>JOGAR MARATONA</button>
             </div>
             ${catalog.map((g) => {
               const ok = n >= g.min && n <= g.max;

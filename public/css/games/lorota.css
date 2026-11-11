@@ -1,7 +1,7 @@
 /* Lorota */
 .lo-fact { font-size: 2.4rem; max-width: 82rem; }
 .lo-fact.big { font-size: 3.2rem; }
-.lo-cat { display: inline-block; font-family: var(--display); font-size: 1.3rem; background: var(--orange); color: #fff; -webkit-text-stroke: 0.04em var(--ink); paint-order: stroke fill; border: 0.2rem solid var(--ink); border-radius: 0.6rem; padding: 0.1rem 0.8rem; margin-bottom: 0.5rem; transform: rotate(-2deg); }
+.lo-cat { display: table; margin-left: auto; margin-right: auto; font-family: var(--display); font-size: 1.3rem; background: var(--orange); color: #fff; -webkit-text-stroke: 0.04em var(--ink); paint-order: stroke fill; border: 0.2rem solid var(--ink); border-radius: 0.6rem; padding: 0.1rem 0.8rem; margin-bottom: 0.5rem; transform: rotate(-2deg); }
 .lo-truth { background: var(--green); color: var(--ink); padding: 0 0.3em; border-radius: 0.3em; border: 0.15rem solid var(--ink); animation: pop-in 0.5s both; display: inline-block; }
 .lo-col { gap: 2rem; }
 .lo-cats { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }

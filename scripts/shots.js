@@ -42,7 +42,7 @@ const exe =
   });
 const browser = await chromium.launch({ executablePath: exe, headless: true, args: ['--autoplay-policy=no-user-gesture-required'] });
 const errors = [];
-const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+const page = await browser.newPage({ viewport: { width: Number(process.env.SHOTS_W) || 1280, height: Number(process.env.SHOTS_H) || 720 } });
 page.on('pageerror', (e) => errors.push(`[tv] ${e.message}`));
 page.on('console', (m) => m.type() === 'error' && !/favicon|404/.test(m.text()) && errors.push(`[tv] ${m.text()}`));
 const shot = (name) => page.screenshot({ path: path.join(OUT, `${name}.png`) });

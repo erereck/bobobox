@@ -43,6 +43,8 @@ npm start
 - Os celulares precisam estar **na mesma rede Wi-Fi**: é só escanear o QR code da TV.
 - No Windows, se o celular não conectar, libere o Node no Firewall quando ele perguntar (redes privadas).
 
+> 🗣️ **Dica:** abra a TV no **Microsoft Edge** — ele tem vozes neurais em pt-BR (Francisca/Antonio) muito mais naturais pro narrador. No Chrome também funciona, com a voz do Google.
+
 Atalhos na TV: **Espaço** pula · **P** pausa · **F** tela cheia · **M** mudo · **Esc** volta pro menu.
 
 ### Variáveis de ambiente
@@ -66,6 +68,12 @@ npm run simulate -- party 6       # uma maratona inteira
 ```
 
 A simulação sobe o servidor com o tempo acelerado e falha se qualquer jogo travar ou der erro.
+
+```bash
+npm run shots -- quiz arena      # QA visual: abre a TV num Edge/Chrome headless e tira print de cada fase
+```
+
+Os prints vão pra pasta `shots/` (ou `--out pasta`). Precisa de um Edge ou Chrome instalado (ou `BROWSER=/caminho/do/navegador`).
 
 ## Como é feito
 

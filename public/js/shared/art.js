@@ -139,7 +139,7 @@ export function Avatar({ p, size = 64, class: className, mood, style }) {
     viewBox="0 0 100 100"
     width=${size}
     height=${size}
-    style=${style}
+    style=${`--av:${size};${style ?? ''}`}
   >
     <g class="av-body" style=${`transform-origin:50px 90px;transform:rotate(${f.tilt}deg)`}>
       <path d="M12 32 L3 17 L46 14 L50 30Z" fill=${c} stroke=${INK} stroke-width="3" stroke-linejoin="round" />

@@ -17,7 +17,7 @@ function Bubble({ s, side, slot, res, total, show }) {
     ${res
       ? html`<div class="bb-res">
           <${VoteBadges} s=${s} ids=${votes} size=${54} />
-          <div class="bb-pct">${pct}%${res.aud && (res.aud.a + res.aud.b) ? html`<small>👥 ${res.aud[side]}</small>` : null}</div>
+          <div class="bb-pct" style=${res.forfeit ? "visibility:hidden" : ""}>${pct}%${res.aud && (res.aud.a + res.aud.b) ? html`<small>👥 ${res.aud[side]}</small>` : null}</div>
           <div class="bb-author" style=${`--pc:${author?.color}`}>
             <${Avatar} p=${author} size=${84} />
             <span>${author?.name}</span>
