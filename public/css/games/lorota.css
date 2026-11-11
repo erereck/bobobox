@@ -1,0 +1,18 @@
+/* Lorota */
+.lo-fact { font-size: 2.4rem; max-width: 82rem; }
+.lo-fact.big { font-size: 3.2rem; }
+.lo-cat { display: inline-block; font-family: var(--display); font-size: 1.3rem; background: var(--orange); color: #fff; -webkit-text-stroke: 0.04em var(--ink); paint-order: stroke fill; border: 0.2rem solid var(--ink); border-radius: 0.6rem; padding: 0.1rem 0.8rem; margin-bottom: 0.5rem; transform: rotate(-2deg); }
+.lo-truth { background: var(--green); color: var(--ink); padding: 0 0.3em; border-radius: 0.3em; border: 0.15rem solid var(--ink); animation: pop-in 0.5s both; display: inline-block; }
+.lo-col { gap: 2rem; }
+.lo-cats { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+.lo-chooser { display: flex; align-items: center; gap: 1.4rem; font-size: 2.4rem; text-shadow: 0 0.2rem 0 var(--ink); }
+.lo-chooser b { font-family: var(--display); font-weight: 400; color: var(--yellow); }
+.lo-cat-grid { display: grid; grid-template-columns: repeat(2, 30rem); gap: 1.4rem; }
+.lo-cat-card { font-family: var(--display); font-size: 2.8rem; text-align: center; padding: 1.4rem; background: linear-gradient(135deg, var(--orange), var(--yellow)); color: #fff; -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; border: 0.35rem solid var(--ink); border-radius: 1.4rem; box-shadow: 0.5rem 0.5rem 0 var(--ink); animation: pop-in 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both; animation-delay: calc(var(--i) * 0.12s); transition: transform 0.4s, opacity 0.4s, filter 0.4s; }
+.lo-cat-card.picked { transform: scale(1.15) rotate(-2deg); z-index: 2; }
+.lo-cat-card.out { opacity: 0.25; filter: grayscale(1); transform: scale(0.9); }
+.lo-pick { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 1.4rem; }
+.lo-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; padding: 0 6rem; }
+.lo-options.many { grid-template-columns: repeat(3, 1fr); padding: 0 3rem; }
+.lo-opt { background: #fff; color: var(--ink); border: 0.3rem solid var(--ink); border-radius: 1rem; box-shadow: 0.35rem 0.35rem 0 var(--ink); font-size: 2.1rem; text-align: center; padding: 0.8rem 1rem; animation: pop-in 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) both; animation-delay: calc(var(--i) * 0.08s); }
+.lo-reveal-row { display: grid; grid-template-columns: 26rem 1fr; gap: 2rem; padding: 0 3rem; align-items: start; }

@@ -1,0 +1,286 @@
+/* ───────── Fora de Contexto ───────── */
+
+/* animações utilitárias */
+.fc-mold { position: relative; color: #111; animation: fc-drop 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+@keyframes fc-drop { from { transform: translateY(-6rem) rotate(-3deg) scale(0.9); opacity: 0; } }
+.fc-in-left { animation: fc-in-left 0.45s cubic-bezier(0.2, 1.5, 0.4, 1) both; transform-origin: 0 0; }
+@keyframes fc-in-left { from { transform: translateX(-4rem) scale(0.6); opacity: 0; } }
+.fc-in-right { animation: fc-in-right 0.45s 0.25s cubic-bezier(0.2, 1.5, 0.4, 1) both; transform-origin: 100% 0; }
+@keyframes fc-in-right { from { transform: translateX(4rem) scale(0.6); opacity: 0; } }
+.fc-in-up { animation: fc-in-up 0.5s cubic-bezier(0.2, 1.5, 0.4, 1) both; }
+@keyframes fc-in-up { from { transform: translateY(4rem) scale(0.9); opacity: 0; } }
+.fc-in-slam { animation: fc-slam 0.5s cubic-bezier(0.2, 1.8, 0.4, 1) both; }
+@keyframes fc-slam { from { transform: scale(2.6) rotate(-6deg); opacity: 0; } }
+.fc-in-fade { animation: fc-fade 0.9s ease-out both; }
+@keyframes fc-fade { from { opacity: 0; filter: blur(0.5rem); transform: scale(1.15); } }
+.fc-skel { height: 1.8rem; border-radius: 0.5rem; background: linear-gradient(90deg, #0000000f 0%, #00000024 50%, #0000000f 100%); background-size: 200% 100%; animation: fc-shimmer 1.2s linear infinite; }
+.fc-skel.short { width: 60%; }
+@keyframes fc-shimmer { to { background-position: -200% 0; } }
+.fc-skel + .fc-skel { margin-top: 0.6rem; }
+
+/* ───────── revelação: palco + coluna lateral ───────── */
+.fc-show { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) 27rem; gap: 2rem; padding: 0 1rem 0 1.5rem; }
+.fc-stage { display: flex; justify-content: center; align-items: flex-start; padding-top: 0.4rem; min-width: 0; }
+.fc-side { display: flex; flex-direction: column; gap: 1.2rem; padding-top: 0.6rem; perspective: 60rem; }
+.fc-moldtag { align-self: flex-start; display: flex; align-items: center; gap: 0.6rem; background: var(--mc); color: var(--ink); font-family: var(--display); font-size: 2rem; padding: 0.25rem 1.2rem 0.25rem 0.6rem; border: 0.3rem solid var(--ink); border-radius: 99rem; box-shadow: 0 0.3rem 0 var(--ink); transform: rotate(-2deg); animation: pop-in 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both; }
+.fc-moldtag span { font-size: 2.4rem; }
+.fc-orig { background: var(--paper); color: var(--ink); border: 0.35rem solid var(--ink); border-radius: 1.4rem; box-shadow: 0.5rem 0.5rem 0 var(--ink); padding: 1rem 1.2rem 1.2rem; display: flex; flex-direction: column; gap: 0.8rem; min-height: 24rem; }
+.fc-orig.open { animation: fc-flip 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+@keyframes fc-flip { from { transform: rotateY(90deg); } }
+.fc-orig-head { font-family: var(--display); font-size: 1.5rem; color: var(--pink); letter-spacing: 0.04em; }
+.fc-orig-lock { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.4rem; background: repeating-linear-gradient(45deg, #0000000a 0 1rem, transparent 1rem 2rem); border-radius: 1rem; border: 0.2rem dashed #0002; }
+.fc-orig-lock span { font-family: var(--display); font-size: 8rem; color: #00000026; line-height: 1; animation: wobble 1.6s ease-in-out infinite; }
+.fc-orig-lock small { font-size: 1.2rem; opacity: 0.6; line-height: 1.25; }
+.fc-orig-q { font-size: 2rem; line-height: 1.15; }
+.fc-orig-q small { display: block; font-size: 1.1rem; opacity: 0.6; }
+.fc-orig-who, .fc-orig-twist { display: flex; align-items: center; gap: 0.6rem; }
+.fc-orig-who span, .fc-orig-twist span { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
+.fc-orig-who small, .fc-orig-twist small { font-size: 1rem; opacity: 0.7; }
+.fc-orig-who b, .fc-orig-twist b { font-size: 1.7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fc-orig-ans { background: #fff; border: 0.2rem dashed #0003; border-radius: 0.8rem; padding: 0.5rem 0.8rem; font-size: 1.6rem; line-height: 1.15; }
+.fc-orig-twist { background: var(--pc); border: 0.25rem solid var(--ink); border-radius: 1rem; padding: 0.4rem 0.7rem; flex-wrap: wrap; box-shadow: 0 0.25rem 0 var(--ink); animation: pop-in 0.5s 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both; }
+
+/* ───────── 💬 grupo da família ───────── */
+.fc-zap { width: 58rem; height: 44rem; display: flex; flex-direction: column; background: #efe7de; border: 0.4rem solid var(--ink); border-radius: 2rem; overflow: hidden; box-shadow: 0.8rem 0.8rem 0 var(--ink); font-family: var(--body); }
+.fc-zap-head { display: flex; align-items: center; gap: 1rem; background: #075e54; color: #fff; padding: 0.8rem 1.4rem; flex: none; }
+.fc-zap-back { font-size: 3rem; line-height: 1; }
+.fc-zap-gav { width: 4.2rem; height: 4.2rem; border-radius: 50%; background: #d9fdd3; display: grid; place-items: center; font-size: 2.2rem; flex: none; }
+.fc-zap-title { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.fc-zap-title b { font-size: 2rem; font-weight: 900; }
+.fc-zap-title small { font-size: 1.2rem; font-weight: 600; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc-zap-title small.typing { color: #9ef0b6; font-style: italic; opacity: 1; }
+.fc-zap-icons { font-size: 1.7rem; letter-spacing: 0.5rem; }
+.fc-zap-body {
+  flex: 1; display: flex; flex-direction: column; gap: 1.2rem; padding: 1.2rem 2.2rem; overflow: hidden;
+  background-color: #efe7de;
+  background-image: radial-gradient(#0000000f 0.2rem, transparent 0.22rem), radial-gradient(#0000000a 0.14rem, transparent 0.16rem);
+  background-size: 3rem 3rem, 2rem 2rem; background-position: 0 0, 1rem 1.5rem;
+}
+.fc-zap-day { align-self: center; background: #e1f2fb; color: #3d5a6b; font-size: 1.1rem; font-weight: 800; padding: 0.3rem 1rem; border-radius: 0.6rem; box-shadow: 0 0.1rem 0 #0002; }
+.fc-bub { position: relative; max-width: 82%; padding: 0.8rem 1.2rem 1.7rem; border-radius: 1.2rem; box-shadow: 0 0.15rem 0 #00000026; line-height: 1.18; font-weight: 700; color: #111b21; }
+.fc-bub.out { align-self: flex-end; background: #d9fdd3; border-top-right-radius: 0.2rem; }
+.fc-bub.in { align-self: flex-start; background: #fff; border-top-left-radius: 0.2rem; }
+.fc-bub.out::before, .fc-bub.in::before { content: ''; position: absolute; top: 0; width: 1.3rem; height: 1.3rem; }
+.fc-bub.out::before { right: -1.1rem; background: #d9fdd3; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.fc-bub.in::before { left: -1.1rem; background: #fff; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.fc-bub-meta { position: absolute; right: 1rem; bottom: 0.35rem; font-size: 1rem; font-style: normal; color: #667781; font-weight: 600; }
+.fc-bub-meta b { color: #53bdeb; }
+.fc-bub-name { color: #d6336c; font-size: 1.4rem; font-weight: 900; margin-bottom: 0.3rem; }
+.fc-bub-quote { background: #f0f2f5; border-left: 0.5rem solid #06cf9c; border-radius: 0.6rem; padding: 0.4rem 0.8rem; margin-bottom: 0.6rem; font-size: 1.2rem; display: flex; flex-direction: column; color: #54656f; max-width: 42rem; }
+.fc-bub-quote b { color: #06a884; }
+.fc-bub-quote span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc-bub-text { display: block; padding-right: 3.6rem; }
+.fc-bub-text.big { font-weight: 900; padding-right: 2.6rem; }
+.fc-typing { display: flex; gap: 0.5rem; padding: 1.2rem 1.5rem !important; animation: fc-in-left 0.4s 0.8s both; }
+.fc-typing i { width: 0.9rem; height: 0.9rem; border-radius: 50%; background: #8696a0; animation: dots 1s infinite; }
+.fc-typing i:nth-child(2) { animation-delay: 0.15s; }
+.fc-typing i:nth-child(3) { animation-delay: 0.3s; }
+.fc-zap-input { display: flex; gap: 1rem; padding: 0.7rem 1.2rem; background: #f0f2f5; align-items: center; flex: none; }
+.fc-zap-input span { flex: 1; background: #fff; border-radius: 99rem; padding: 0.6rem 1.4rem; color: #8696a0; font-size: 1.3rem; }
+.fc-zap-input b { width: 3.6rem; height: 3.6rem; border-radius: 50%; background: #00a884; display: grid; place-items: center; font-size: 1.6rem; }
+
+/* ───────── 📰 portal de notícias ───────── */
+.fc-news { width: 60rem; background: #fff; border: 0.4rem solid var(--ink); border-radius: 1.2rem; overflow: hidden; box-shadow: 0.8rem 0.8rem 0 var(--ink); font-family: var(--body); }
+.fc-news-top { display: flex; align-items: center; gap: 1.2rem; background: #c4170c; color: #fff; padding: 0.6rem 1.4rem; font-size: 1.8rem; }
+.fc-news-top b { font-family: var(--display); font-size: 2.6rem; font-weight: 400; letter-spacing: 0.02em; }
+.fc-news-top b em { font-style: normal; color: #ffd23f; }
+.fc-news-live { margin-left: auto; font-size: 1.2rem; background: #fff; color: #c4170c; padding: 0.2rem 0.8rem; border-radius: 0.4rem; font-weight: 900; animation: fc-blink 1s steps(1) infinite; }
+@keyframes fc-blink { 50% { opacity: 0.35; } }
+.fc-news-body { padding: 1.1rem 2rem 1.4rem; display: flex; flex-direction: column; gap: 0.65rem; }
+.fc-news-sec { color: #c4170c; font-size: 1.2rem; font-weight: 900; letter-spacing: 0.08em; }
+.fc-news-h { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; line-height: 1.1; color: #111; letter-spacing: -0.01em; }
+.fc-news-by { font-size: 1.1rem; color: #777; font-weight: 600; }
+.fc-news-row { display: flex; gap: 1.2rem; align-items: stretch; }
+.fc-news-photo { position: relative; flex: none; width: 15rem; height: 8.4rem; border-radius: 0.6rem; background: linear-gradient(135deg, #3a3d52, #8a8fa8); display: grid; place-items: center; font-size: 4rem; overflow: hidden; }
+.fc-news-photo span { animation: wobble 1.4s ease-in-out infinite; }
+.fc-news-photo small { position: absolute; left: 0; right: 0; bottom: 0; font-size: 0.75rem; color: #fff; background: #0009; padding: 0.15rem 0.4rem; font-weight: 600; }
+.fc-news-row p { margin: 0; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 400; color: #333; line-height: 1.3; }
+.fc-news-cmts { font-size: 1.3rem; font-weight: 900; color: #333; border-top: 0.15rem solid #eee; padding-top: 0.6rem; }
+.fc-news-cmt { display: flex; gap: 1rem; background: #f6f6f6; border: 0.2rem solid #e3e3e3; border-radius: 1rem; padding: 0.9rem 1.2rem; align-items: flex-start; }
+.fc-news-cmt.ghost { align-items: center; }
+.fc-news-cmt.ghost .fc-skel { flex: 1; }
+.fc-news-av { flex: none; width: 4rem; height: 4rem; border-radius: 50%; background: #c4170c; color: #fff; display: grid; place-items: center; font-family: var(--display); font-size: 2rem; }
+.fc-news-cbody { flex: 1; min-width: 0; }
+.fc-news-user { font-size: 1.25rem; color: #555; font-weight: 900; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.fc-badge { background: #ffd23f; color: var(--ink); border-radius: 0.4rem; padding: 0 0.5rem; font-size: 1rem; border: 0.12rem solid var(--ink); }
+.fc-news-ctext { font-weight: 900; color: #111; line-height: 1.15; margin: 0.2rem 0 0.3rem; }
+.fc-news-react { font-size: 1.1rem; color: #777; font-weight: 700; }
+
+/* ───────── ⭐ avaliação 1 estrela ───────── */
+.fc-review { width: 60rem; background: #ededed; border: 0.4rem solid var(--ink); border-radius: 1.2rem; overflow: hidden; box-shadow: 0.8rem 0.8rem 0 var(--ink); font-family: var(--body); }
+.fc-rv-top { display: flex; align-items: center; gap: 1.2rem; background: #ffe600; padding: 0.7rem 1.4rem; color: #333; font-size: 1.6rem; }
+.fc-rv-top b { font-family: var(--display); font-weight: 400; font-size: 2.2rem; color: #2d3277; }
+.fc-rv-search { flex: 1; background: #fff; border-radius: 0.4rem; padding: 0.5rem 1rem; color: #999; font-size: 1.1rem; font-weight: 600; box-shadow: 0 0.1rem 0.2rem #0002; }
+.fc-rv-prod { display: flex; gap: 1.6rem; background: #fff; margin: 1rem 1rem 0; border-radius: 0.8rem; padding: 1.2rem; }
+.fc-rv-img { flex: none; width: 13rem; height: 13rem; border-radius: 0.6rem; background: radial-gradient(circle at 50% 40%, #fff, #e8e8e8); border: 0.15rem solid #e0e0e0; display: grid; place-items: center; font-size: 7rem; }
+.fc-rv-info { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.fc-rv-new { font-size: 1.1rem; color: #999; font-weight: 600; }
+.fc-rv-info h2 { margin: 0; font-weight: 700; color: #333; line-height: 1.12; }
+.fc-rv-stars { display: flex; align-items: center; gap: 0.6rem; font-size: 1.2rem; color: #3483fa; font-weight: 700; }
+.fc-stars { display: inline-flex; gap: 0.1rem; font-size: 1.8rem; color: #cfcfcf; line-height: 1; }
+.fc-stars i { font-style: normal; }
+.fc-stars i.on { color: #3483fa; }
+.fc-rv-price { font-size: 3rem; font-weight: 400; color: #333; line-height: 1.1; }
+.fc-rv-ship { font-size: 1.25rem; color: #00a650; font-weight: 900; }
+.fc-rv-ops { margin: 1rem 2.2rem 0.4rem; font-size: 1.6rem; font-weight: 900; color: #333; }
+.fc-rv-card { margin: 0 1rem 1.2rem; background: #fff; border-radius: 0.8rem; padding: 1.1rem 1.6rem; display: flex; flex-direction: column; gap: 0.5rem; min-height: 10rem; }
+.fc-rv-card.ghost { justify-content: center; }
+.fc-rv-head { display: flex; align-items: center; gap: 1rem; font-size: 1.5rem; color: #333; }
+.fc-rv-head .fc-stars { font-size: 2.2rem; }
+.fc-rv-head .fc-stars i.on { color: #ff7733; }
+.fc-rv-text { font-weight: 900; color: #222; line-height: 1.15; }
+.fc-rv-foot { font-size: 1.1rem; color: #888; font-weight: 600; }
+
+/* ───────── 🪧 placa (foto polaroid) ───────── */
+.fc-polaroid { width: 56rem; background: #fff; padding: 1.2rem 1.2rem 0; border: 0.35rem solid var(--ink); border-radius: 0.5rem; box-shadow: 0.8rem 0.8rem 0 var(--ink); transform: rotate(-1.5deg); }
+.fc-photo { position: relative; height: 33rem; overflow: hidden; border: 0.2rem solid #0003; background: linear-gradient(#5bbcff, #c9ecff 64%, #7bc96f 64%, #4f9d47); }
+.fc-photo::before { content: ''; position: absolute; top: 2.2rem; right: 3.5rem; width: 6rem; height: 6rem; border-radius: 50%; background: #ffe680; box-shadow: 0 0 3rem #fff8; }
+.fc-photo::after { content: ''; position: absolute; top: 4rem; left: 3rem; width: 10rem; height: 2.6rem; border-radius: 99rem; background: #fff; box-shadow: 6rem 1.6rem 0 -0.4rem #fffe, 32rem -1rem 0 0.2rem #fffc; }
+.fc-sign-post { position: absolute; bottom: 0; width: 1.4rem; height: 24rem; background: linear-gradient(90deg, #7b7f86, #e1e4e8, #7b7f86); border: 0.2rem solid #333; z-index: 1; }
+.fc-sign-post.l { left: 17rem; }
+.fc-sign-post.r { right: 17rem; }
+.fc-sign {
+  position: absolute; left: 50%; top: 3.2rem; transform: translateX(-50%); z-index: 2; width: 40rem; min-height: 21rem;
+  background: #ffd400; border: 0.5rem solid #111; border-radius: 1.4rem;
+  box-shadow: inset 0 0 0 0.6rem #ffd400, inset 0 0 0 0.95rem #111, 0.5rem 0.7rem 0 #00000040;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 2.6rem; text-align: center; color: #111;
+}
+.fc-sign-tri { font-size: 3.6rem; line-height: 1; }
+.fc-sign-att { font-family: 'Bungee', var(--display); font-size: 2.2rem; letter-spacing: 0.12em; margin-bottom: 0.6rem; }
+.fc-sign-text { font-family: 'Bungee', var(--display); text-transform: uppercase; line-height: 1.05; overflow-wrap: anywhere; }
+.fc-sign-text.dim { opacity: 0.3; font-size: 3rem; animation: pulse 1.2s infinite; }
+.fc-polaroid-cap { font-family: 'Marker', var(--display); color: #222; font-size: 2.2rem; padding: 0.6rem 0.6rem 1rem; line-height: 1.1; min-height: 5rem; }
+.fc-polaroid-cap small { font-family: var(--body); font-size: 1.05rem; color: #888; display: block; font-weight: 800; }
+
+/* ───────── 🪦 últimas palavras ───────── */
+.fc-grave { width: 58rem; height: 44rem; border: 0.4rem solid var(--ink); border-radius: 1.6rem; overflow: hidden; background: radial-gradient(circle at 80% 12%, #3b3f7a 0, #1c1f45 40%, #0e1030 100%); box-shadow: 0.8rem 0.8rem 0 var(--ink); display: flex; flex-direction: column; align-items: center; }
+.fc-grave::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(#fff 0.1rem, transparent 0.12rem), radial-gradient(#fff9 0.08rem, transparent 0.1rem); background-size: 9rem 7rem, 5rem 6rem; background-position: 1rem 1rem, 3rem 4rem; opacity: 0.6; pointer-events: none; }
+.fc-grave-moon { position: absolute; top: 2rem; right: 4rem; width: 6rem; height: 6rem; border-radius: 50%; box-shadow: inset 1.6rem -0.6rem 0 0 #fdf6c9; filter: drop-shadow(0 0 1.2rem #fdf6c988); }
+.fc-grave-title { position: relative; margin-top: 0.8rem; font-size: 3.6rem; color: #b7f5b0; text-shadow: 0 0.3rem 0 #000; }
+.fc-tomb {
+  position: relative; margin-top: 0.4rem; width: 36rem; flex: 1; min-height: 0;
+  background: linear-gradient(160deg, #c3c8d0, #959ba6 60%, #7a808b);
+  border: 0.4rem solid var(--ink); border-bottom: none; border-radius: 18rem 18rem 0 0;
+  padding: 3.6rem 3rem 1.6rem; display: flex; flex-direction: column; align-items: center; text-align: center; color: #3c4048; gap: 0.3rem;
+  box-shadow: inset -1.2rem 0 0 #0000001a;
+}
+.fc-tomb-rip { font-family: Georgia, serif; font-size: 3rem; font-weight: 700; letter-spacing: 0.15em; color: #4a4f58; text-shadow: 0 0.12rem 0 #e2e5ea; }
+.fc-tomb-jaz { font-size: 1.2rem; letter-spacing: 0.3em; font-weight: 900; }
+.fc-tomb-name { font-family: Georgia, serif; font-size: 2.2rem; font-weight: 700; color: #2f333a; text-shadow: 0 0.12rem 0 #e2e5ea; }
+.fc-tomb-years { font-size: 1.2rem; font-weight: 800; }
+.fc-tomb-words { font-family: Georgia, serif; font-style: italic; font-weight: 700; color: #23262c; line-height: 1.15; margin: 0.6rem 0; text-shadow: 0 0.12rem 0 #d5d9de; }
+.fc-tomb-words.dim { font-size: 3rem; opacity: 0.4; }
+.fc-tomb-how { margin-top: auto; font-size: 1.35rem; font-weight: 800; background: #00000022; padding: 0.4rem 1rem; border-radius: 0.6rem; color: #1f2227; line-height: 1.2; }
+.fc-grave-grass { position: relative; flex: none; width: 100%; height: 4.2rem; background: linear-gradient(#2f7a3a, #1d5226); border-top: 0.4rem solid var(--ink); display: flex; justify-content: center; gap: 13rem; font-size: 3rem; margin-top: -0.4rem; }
+.fc-grave-grass span { transform: translateY(-2.4rem); }
+
+/* ───────── 🖋️ tatuagem ───────── */
+.fc-tattoo { width: 60rem; display: flex; flex-direction: column; align-items: center; }
+.fc-skin {
+  position: relative; width: 58rem; height: 35rem; border: 0.4rem solid var(--ink); border-radius: 50% / 40%;
+  background: radial-gradient(ellipse at 38% 32%, #f8d9b4, #eab889 55%, #d49c6b);
+  box-shadow: 0.8rem 0.8rem 0 var(--ink), inset -2.4rem -2rem 4rem #0000002a; display: grid; place-items: center; overflow: hidden;
+}
+.fc-skin::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(#a0643522 0.12rem, transparent 0.14rem); background-size: 1.6rem 1.4rem; pointer-events: none; }
+.fc-tat { position: relative; width: 50rem; height: 33.3rem; }
+.fc-tat svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.fc-tat path { stroke: #1a1d3a; stroke-width: 9; stroke-linejoin: round; stroke-linecap: round; }
+.fc-tat-heart { fill: #e63946; }
+.fc-tat-band { fill: #fff3d6; }
+.fc-tat-tail { fill: #f2d29b; }
+.fc-tat-spark { fill: #2a6fdb; stroke-width: 5 !important; }
+.fc-tat.stencil path { fill: none; stroke: #6b3fa0; stroke-width: 4; stroke-dasharray: 14 10; opacity: 0.55; }
+.fc-tat.on svg { animation: fc-ink 0.7s ease-out both; }
+.fc-tat-text { position: absolute; left: 14%; right: 14%; top: 34%; height: 25%; display: grid; place-items: center; text-align: center; font-family: 'Marker', var(--display); color: #1a2459; line-height: 1; transform: rotate(-1.5deg); animation: fc-ink 0.9s 0.25s ease-out both; overflow-wrap: anywhere; }
+@keyframes fc-ink { from { filter: blur(0.6rem); opacity: 0; transform: scale(1.15); } }
+.fc-tat-tag { position: relative; margin-top: -2.4rem; max-width: 50rem; display: flex; flex-direction: column; align-items: center; background: #111; color: #fff; border: 0.3rem solid #fff; outline: 0.3rem solid var(--ink); border-radius: 0.8rem; padding: 0.5rem 1.4rem 0.7rem; transform: rotate(1.5deg); box-shadow: 0.5rem 0.5rem 0 var(--ink); text-align: center; z-index: 2; }
+.fc-tat-studio { font-family: 'Marker', var(--display); font-size: 1.4rem; color: #ffd23f; }
+.fc-tat-where { font-size: 2rem; font-weight: 900; line-height: 1.15; }
+
+/* ───────── 💘 app de namoro ───────── */
+.fc-date { width: 42rem; height: 43rem; background: #fff; border: 0.4rem solid var(--ink); border-radius: 2.4rem; overflow: hidden; box-shadow: 0.8rem 0.8rem 0 var(--ink); display: flex; flex-direction: column; font-family: var(--body); }
+.fc-date-top { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.4rem; font-size: 1.8rem; color: #bbb; flex: none; }
+.fc-date-top b { font-family: var(--display); font-weight: 400; font-size: 2.4rem; background: linear-gradient(90deg, #fd297b, #ff655b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fc-date-card { position: relative; margin: 0 1rem; height: 22rem; border-radius: 1.4rem; overflow: hidden; flex: none; background: linear-gradient(160deg, hsl(var(--h) 85% 72%), hsl(calc(var(--h) + 60) 70% 45%)); }
+.fc-date-photo { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13rem; padding-bottom: 5rem; }
+.fc-date-photo span { filter: drop-shadow(0 0.6rem 0 #0003); animation: fc-sway 3s ease-in-out infinite; }
+@keyframes fc-sway { 50% { transform: rotate(-4deg) translateY(-0.4rem); } }
+.fc-date-dots { position: absolute; top: 0.6rem; left: 1rem; right: 1rem; display: flex; gap: 0.4rem; }
+.fc-date-dots i { flex: 1; height: 0.35rem; border-radius: 99rem; background: #fff6; }
+.fc-date-dots i.on { background: #fff; }
+.fc-date-name { position: absolute; left: 0; right: 0; bottom: 0; padding: 3.2rem 1.4rem 1rem; background: linear-gradient(transparent, #000000cc); color: #fff; display: flex; flex-direction: column; gap: 0.2rem; }
+.fc-date-name b { font-weight: 900; line-height: 1.08; }
+.fc-date-name small { font-size: 1.1rem; opacity: 0.9; font-weight: 700; }
+.fc-date-bio { flex: 1; margin: 0.8rem 1.6rem 0; display: flex; flex-direction: column; gap: 0.4rem; min-height: 0; }
+.fc-date-label { font-size: 1.2rem; font-weight: 900; color: #fd297b; letter-spacing: 0.08em; text-transform: uppercase; }
+.fc-date-text { font-weight: 900; color: #222; line-height: 1.15; }
+.fc-date-btns { display: flex; justify-content: center; align-items: center; gap: 2.4rem; padding: 0.4rem 0 1.1rem; flex: none; }
+.fc-date-btns i { width: 5.2rem; height: 5.2rem; border-radius: 50%; background: #fff; border: 0.25rem solid #eee; box-shadow: 0 0.3rem 0.8rem #00000026; display: grid; place-items: center; font-style: normal; font-size: 2.4rem; font-weight: 900; }
+.fc-date-btns .no { color: #ff4458; }
+.fc-date-btns .star { color: #2db2ff; width: 4.2rem; height: 4.2rem; font-size: 1.9rem; }
+.fc-date-btns .yes { color: #1ec98c; }
+
+/* ───────── 📢 outdoor ───────── */
+.fc-bb { width: 64rem; display: flex; flex-direction: column; align-items: center; }
+.fc-bb-lights { position: relative; z-index: 2; display: flex; justify-content: space-around; width: 52rem; height: 2.2rem; }
+.fc-bb-lights i { position: relative; width: 5rem; height: 2rem; background: #333; border: 0.25rem solid var(--ink); border-radius: 0.4rem 0.4rem 2rem 2rem; }
+.fc-bb-lights i::after { content: ''; position: absolute; top: 1.6rem; left: 50%; width: 15rem; height: 11rem; transform: translateX(-50%); background: radial-gradient(ellipse at top, #ffffff66, transparent 70%); pointer-events: none; }
+.fc-bb-board { position: relative; width: 64rem; height: 31rem; border: 0.7rem solid #222; outline: 0.3rem solid var(--ink); background: var(--ad); box-shadow: 0.9rem 0.9rem 0 var(--ink); padding: 1.8rem 2.6rem 2.6rem; display: flex; flex-direction: column; overflow: hidden; }
+.fc-bb-board::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, #ffffff1c 0 2rem, transparent 2rem 4rem); pointer-events: none; }
+.fc-bb-brand { position: relative; align-self: flex-start; background: #fff; color: var(--ink); font-family: var(--display); border: 0.3rem solid var(--ink); border-radius: 0.8rem; padding: 0.2rem 1rem; transform: rotate(-2deg); box-shadow: 0.3rem 0.3rem 0 var(--ink); max-width: 85%; line-height: 1.1; }
+.fc-bb-slogan { position: relative; flex: 1; display: grid; place-items: center; text-align: center; font-family: var(--display); color: #fff; -webkit-text-stroke: 0.08em var(--ink); paint-order: stroke fill; text-shadow: 0 0.35rem 0 var(--ink); line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
+.fc-bb-slogan.soon { opacity: 0.45; font-size: 4.4rem; animation: pulse 1.4s infinite; }
+.fc-bb-fine { position: absolute; left: 1.2rem; right: 1.2rem; bottom: 0.5rem; font-size: 0.8rem; color: #000000b0; font-weight: 800; }
+.fc-bb-legs { display: flex; justify-content: space-between; width: 40rem; height: 8rem; }
+.fc-bb-legs i { width: 2rem; background: linear-gradient(90deg, #555, #aaa, #555); border: 0.25rem solid var(--ink); border-top: none; }
+
+/* ───────── votação / resultado ───────── */
+.fc-vote { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.fc-vote-title { margin: 0; font-family: var(--display); font-weight: 400; font-size: 3.4rem; line-height: 1; color: var(--gc); -webkit-text-stroke: 0.07em var(--ink); paint-order: stroke fill; text-shadow: 0 0.3rem 0 var(--ink); text-align: center; }
+.fc-vote-sub { font-size: 1.4rem; opacity: 0.85; text-shadow: 0 0.15rem 0 var(--ink); }
+.fc-grid { --cw: 29.5rem; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1.3rem 1.6rem; width: 100%; padding: 0.8rem 1rem 0; }
+.fc-grid.n1, .fc-grid.n2 { --cw: 40rem; }
+.fc-grid.n4 { --cw: 39rem; }
+.fc-grid.n4 .fc-card-ctx, .fc-grid.n5 .fc-card-ctx, .fc-grid.n6 .fc-card-ctx { font-size: 1.25rem; }
+.fc-grid.n4 .fc-card-ans, .fc-grid.n5 .fc-card-ans, .fc-grid.n6 .fc-card-ans { font-size: 1.75rem; }
+.fc-vote .vote-banner { font-size: 2.4rem; bottom: 7.4rem; }
+.fc-card { width: var(--cw); position: relative; background: var(--paper); color: var(--ink); border: 0.35rem solid var(--ink); border-radius: 1.2rem; box-shadow: 0.45rem 0.45rem 0 var(--ink); display: flex; flex-direction: column; animation: pop-in 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both; animation-delay: calc(var(--i) * 0.1s); transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.5s; }
+.fc-card-head { background: var(--mc); border-bottom: 0.3rem solid var(--ink); border-radius: 0.85rem 0.85rem 0 0; padding: 0.25rem 0.9rem; font-family: var(--display); font-size: 1.4rem; display: flex; gap: 0.5rem; align-items: center; color: var(--ink); }
+.fc-card-head span { font-size: 1.7rem; }
+.fc-card-body { padding: 0.6rem 1rem 0.9rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.fc-card-ctx { font-size: 1.4rem; line-height: 1.15; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.fc-card-lbl { font-size: 0.95rem; text-transform: uppercase; opacity: 0.6; letter-spacing: 0.05em; font-weight: 900; }
+.fc-card-ctx .fc-card-lbl { margin-right: 0.2rem; }
+.fc-card-ans { font-size: 2rem; line-height: 1.1; font-weight: 900; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.fc-card.win { background: #fff6c2; transform: scale(1.04) rotate(-0.8deg); z-index: 2; }
+.fc-card.lose { filter: saturate(0.55) brightness(0.9); transform: scale(0.97); }
+.fc-crown { position: absolute; top: -2.6rem; left: -1.4rem; font-size: 3.6rem; transform: rotate(-20deg); animation: pop-in 0.5s 0.4s both; z-index: 3; }
+.fc-card-res { display: flex; flex-direction: column; gap: 0.4rem; border-top: 0.2rem dashed #00000026; padding-top: 0.5rem; margin-top: 0.3rem; }
+.fc-card-votes { display: flex; align-items: center; gap: 0.6rem; min-height: 2.4rem; flex-wrap: wrap; font-size: 1.2rem; }
+.fc-card-aud { font-size: 1.3rem; }
+.fc-card-who { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.fc-chip { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--pc); border: 0.2rem solid var(--ink); border-radius: 99rem; padding: 0.05rem 0.6rem; font-size: 1.15rem; max-width: 100%; white-space: nowrap; animation: flip-in 0.5s 0.3s both; }
+.fc-chip b { font-family: var(--display); font-weight: 400; color: #0b5e33; }
+.fc-chip.small { font-size: 0.95rem; }
+/* resultado com 5+ cartas em duas linhas: compacta pra caber no palco */
+.fc-vote.res .fc-grid.n5 .fc-card-alb, .fc-vote.res .fc-grid.n6 .fc-card-alb { display: none; }
+.fc-vote.res .fc-grid.n5 .fc-card-ctx, .fc-vote.res .fc-grid.n6 .fc-card-ctx { -webkit-line-clamp: 2; }
+.fc-vote.res .fc-grid.n5 .fc-card-ans, .fc-vote.res .fc-grid.n6 .fc-card-ans { -webkit-line-clamp: 2; }
+.fc-vote.res .fc-grid.n5 .fc-card-res, .fc-vote.res .fc-grid.n6 .fc-card-res { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.3rem 0.6rem; }
+.fc-total-stamp { position: absolute; top: -1.8rem; right: -1.2rem; transform: rotate(8deg); white-space: nowrap; font-family: var(--display); font-size: 1.7rem; color: #fff; background: var(--red); border: 0.3rem solid var(--ink); border-radius: 0.6rem; padding: 0.1em 0.5em; box-shadow: 0 0.3rem 0 var(--ink); animation: fc-stamp 0.5s 0.6s cubic-bezier(0.2, 1.8, 0.4, 1) both; z-index: 4; pointer-events: none; }
+@keyframes fc-stamp { from { transform: rotate(8deg) scale(4); opacity: 0; } }
+
+/* ───────── transições ───────── */
+.fc-deck { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; max-width: 92rem; margin-bottom: 7rem; }
+.fc-deck-card {
+  width: 10rem; height: 10.5rem; background: var(--paper); color: var(--ink); border: 0.3rem solid var(--ink); border-top: 1rem solid var(--mc); border-radius: 1rem; box-shadow: 0.35rem 0.35rem 0 var(--ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; text-align: center; padding: 0.6rem; font-family: var(--display); font-size: 1.3rem; line-height: 1.05;
+  animation: fc-deal 0.6s cubic-bezier(0.2, 1.5, 0.4, 1) both, fc-bob 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.12s), calc(var(--i) * 0.2s + 0.8s);
+}
+.fc-deck-card span { font-size: 3.6rem; line-height: 1.1; }
+@keyframes fc-deal { from { transform: translateY(20rem) rotate(30deg); opacity: 0; } }
+@keyframes fc-bob { 50% { transform: translateY(-0.7rem) rotate(var(--r, 2deg)); } }
+.fc-twist .mega { font-size: 6.4rem; }
+.fc-snip { font-size: 10rem; line-height: 1; animation: fc-snip 0.5s ease-in-out infinite alternate; filter: drop-shadow(0 0.5rem 0 #00000059); }
+@keyframes fc-snip { from { transform: rotate(-25deg) scale(1); } to { transform: rotate(10deg) scale(1.12); } }

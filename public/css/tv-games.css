@@ -1,0 +1,64 @@
+/* BOBOBOX — estilos específicos de cada jogo na TV */
+
+/* ───────── Garrancho ───────── */
+.gar-layout { position: absolute; inset: 0; display: grid; grid-template-columns: 40rem 1fr; gap: 3rem; align-items: start; padding: 1rem 3rem 0 4rem; }
+.frame { position: relative; width: 40rem; height: 40rem; background: #fff; border: 0.4rem solid var(--ink); border-radius: 0.8rem; padding: 1.2rem; box-shadow: 0.8rem 0.8rem 0 var(--ink); transform: rotate(-2deg); animation: pop-in 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+.frame.small { width: 34rem; height: 34rem; }
+.frame .drawing { border-radius: 0.3rem; border: 0.15rem solid #0001; }
+.frame-tape { position: absolute; top: -1.2rem; width: 9rem; height: 2.6rem; background: #ffd23fcc; border: 0.15rem solid #0002; }
+.frame-tape.l { left: -2rem; transform: rotate(-30deg); }
+.frame-tape.r { right: -2rem; transform: rotate(30deg); }
+.frame-label { position: absolute; bottom: -1.4rem; right: 1.4rem; background: var(--ink); color: #fff; font-size: 1.2rem; padding: 0.2rem 0.8rem; border-radius: 0.5rem; }
+.gar-side { display: flex; flex-direction: column; gap: 1.2rem; padding-top: 1rem; }
+.gar-q { font-size: 5.4rem; line-height: 1; margin: 0; color: var(--yellow); -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; text-shadow: 0 0.3rem 0 var(--ink); font-weight: 400; transform: rotate(-2deg); }
+.gar-q.small { font-size: 3.4rem; }
+.gar-options { display: flex; flex-direction: column; gap: 0.7rem; }
+.gar-opt { background: #fff; color: var(--ink); border: 0.3rem solid var(--ink); border-radius: 1rem; padding: 0.7rem 1.2rem; font-size: 2rem; box-shadow: 0.3rem 0.3rem 0 var(--ink); animation: opt-in 0.4s cubic-bezier(0.2, 1.4, 0.4, 1) both; animation-delay: calc(var(--i) * 0.08s); display: flex; justify-content: space-between; align-items: center; }
+@keyframes opt-in { from { transform: translateX(30rem); opacity: 0; } }
+.gar-opt b { font-family: var(--display); font-weight: 400; background: var(--ink); color: #fff; border-radius: 99rem; min-width: 2.2rem; text-align: center; font-size: 1.3rem; padding: 0 0.5rem; }
+.gar-options.mini .gar-opt { font-size: 1.3rem; padding: 0.35rem 0.8rem; opacity: 0.85; animation: none; }
+.gar-options.mini .gar-opt.done { opacity: 0.3; text-decoration: line-through; }
+.gar-options.mini .gar-opt.now { background: var(--yellow); opacity: 1; transform: scale(1.03); }
+.gar-reveal { position: relative; background: var(--paper); color: var(--ink); border: 0.4rem solid var(--ink); border-radius: 1.6rem; box-shadow: 0.6rem 0.6rem 0 var(--ink); padding: 1.4rem 1.8rem; display: flex; flex-direction: column; gap: 0.8rem; animation: pop-in 0.5s cubic-bezier(0.2, 1.5, 0.4, 1) both; }
+.gr-text { font-size: 3rem; line-height: 1.1; text-align: center; }
+.gr-pickers { display: flex; justify-content: center; align-items: center; gap: 1rem; min-height: 5rem; }
+.gr-aud { font-size: 1.4rem; }
+.gr-stamp { position: absolute; top: -2rem; right: -2rem; font-family: var(--display); font-size: 3.4rem; color: #fff; background: var(--red); border: 0.35rem solid var(--ink); padding: 0.1em 0.5em; border-radius: 0.6rem; transform: rotate(10deg); animation: stamp 0.45s cubic-bezier(0.2, 1.8, 0.4, 1) both; }
+@keyframes stamp { from { transform: rotate(10deg) scale(4); opacity: 0; } }
+.gar-reveal.truth .gr-stamp { background: var(--green); color: var(--ink); }
+.gar-reveal.truth { background: #eafff2; }
+.gar-reveal.house .gr-stamp { background: var(--purple); }
+.gr-authors { display: flex; align-items: center; justify-content: center; gap: 1.4rem; flex-wrap: wrap; }
+.gr-author { display: flex; align-items: center; gap: 0.6rem; background: var(--pc); padding: 0.2rem 1rem 0.2rem 0.3rem; border-radius: 99rem; border: 0.25rem solid var(--ink); font-size: 1.7rem; animation: flip-in 0.5s both; }
+.gr-pts { font-family: var(--display); font-size: 2.2rem; color: #128a4a; animation: pop-in 0.5s 0.3s both; }
+.gr-pts.sad { color: var(--red); }
+.gr-likes { font-size: 1.6rem; }
+
+/* ───────── Racha a Sala ───────── */
+.rc-item { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.rc-card { max-width: 84rem; }
+.rc-card mark.fill { background: linear-gradient(transparent 15%, #ffd23f 15%, #ffd23f 88%, transparent 88%); color: var(--ink); padding: 0 0.2em; border-radius: 0.2em; }
+.rc-q { font-family: var(--display); color: var(--pink); font-size: 2.6rem; margin-top: 0.4rem; }
+.rc-scale { position: relative; width: 50rem; height: 4rem; margin-top: 0.4rem; }
+.rc-beam { position: absolute; left: 0; right: 0; top: 0.8rem; height: 1.2rem; background: var(--paper); border: 0.3rem solid var(--ink); border-radius: 99rem; transition: transform 1.4s cubic-bezier(0.3, 1.6, 0.4, 1); }
+.rc-beam i { position: absolute; top: -0.9rem; width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 0.3rem solid var(--ink); }
+.rc-beam i.l { left: -1rem; background: var(--green); }
+.rc-beam i.r { right: -1rem; background: var(--red); }
+.rc-pivot { position: absolute; left: 50%; top: 1.8rem; width: 0; height: 0; border-left: 1.8rem solid transparent; border-right: 1.8rem solid transparent; border-bottom: 2.8rem solid var(--ink); transform: translateX(-50%); }
+.rc-scale.perfect .rc-beam { box-shadow: 0 0 2rem var(--yellow); }
+.rc-buckets { width: 88rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; flex: 1; max-height: 22rem; }
+.rc-bucket { position: relative; border: 0.4rem solid var(--ink); border-radius: 1.6rem; padding: 0.8rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0.5rem 0.5rem 0 var(--ink); overflow: hidden; }
+.rc-bucket.yes { background: linear-gradient(#3ddc84, #22a862); }
+.rc-bucket.no { background: linear-gradient(#ff5c5c, #d63a3a); }
+.rc-label { font-family: var(--display); font-size: 3rem; -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; }
+.rc-count { position: absolute; top: 0.4rem; right: 1rem; font-family: var(--display); font-size: 4rem; -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; }
+.rc-avs { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-top: 0.6rem; }
+.rc-av { animation: drop-av 0.7s cubic-bezier(0.3, 1.7, 0.5, 1) both; animation-delay: calc(var(--i) * 0.12s); }
+@keyframes drop-av { from { transform: translateY(-30rem) rotate(-40deg); opacity: 0; } }
+.rc-aud { position: absolute; bottom: 0.5rem; left: 1rem; font-size: 1.3rem; }
+.rc-crack { position: absolute; inset: -6rem -2rem 0; pointer-events: none; display: grid; place-items: center; z-index: 5; }
+.rc-crack::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 0.8rem; background: var(--ink); clip-path: polygon(50% 0, 100% 10%, 20% 22%, 100% 35%, 0 50%, 90% 63%, 10% 78%, 80% 90%, 40% 100%, 0 100%, 60% 88%, 0 76%, 80% 62%, 0 48%, 70% 34%, 0 21%, 70% 10%); transform: scaleY(0); transform-origin: top; animation: crack 0.4s ease-out forwards; width: 3rem; margin-left: -1.5rem; }
+@keyframes crack { to { transform: scaleY(1); } }
+.rc-crack span { font-family: var(--display); font-size: 10rem; color: var(--yellow); -webkit-text-stroke: 0.08em var(--ink); paint-order: stroke fill; text-shadow: 0 0.5rem 0 var(--ink); transform: rotate(-8deg); animation: lavada 0.8s 0.2s cubic-bezier(0.2, 1.8, 0.4, 1) both; }
+.rc-author { position: absolute; bottom: 1rem; right: 2rem; display: flex; align-items: center; gap: 0.8rem; background: var(--pc); color: var(--ink); border: 0.3rem solid var(--ink); border-radius: 99rem; padding: 0.3rem 1.4rem 0.3rem 0.4rem; font-size: 1.8rem; box-shadow: 0 0.3rem 0 var(--ink); }
+.rc-author b { font-family: var(--display); font-weight: 400; color: #0b6b38; font-size: 2.2rem; }

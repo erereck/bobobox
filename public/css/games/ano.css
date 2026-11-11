@@ -1,0 +1,22 @@
+/* Que Ano Foi? */
+.an-q { background: var(--paper); color: var(--ink); border: 0.4rem solid var(--ink); border-radius: 1.6rem; box-shadow: 0.6rem 0.6rem 0 var(--ink); padding: 1.4rem 2.4rem; max-width: 80rem; text-align: center; }
+.an-q.small { padding: 0.7rem 1.6rem; margin: 0 auto; }
+.an-q.small .an-event { font-size: 2.2rem; }
+.an-label { font-family: var(--display); color: #0fa892; font-size: 1.8rem; letter-spacing: 0.06em; }
+.an-event { font-size: 3.6rem; line-height: 1.15; }
+.an-reveal { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.an-big { font-family: var(--display); font-size: 9rem; line-height: 1; color: var(--yellow); -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; text-shadow: 0 0.5rem 0 var(--ink); }
+.an-big.suspense { color: #ffffff55; animation: pulse 0.6s infinite; }
+.an-line { position: relative; width: 84rem; height: 1.2rem; margin-top: auto; margin-bottom: 9rem; background: var(--paper); border: 0.3rem solid var(--ink); border-radius: 99rem; box-shadow: 0 0.35rem 0 var(--ink); }
+.an-axis span { position: absolute; top: 2rem; transform: translateX(-50%); font-family: var(--display); font-size: 1.6rem; opacity: 0.8; text-shadow: 0 0.15rem 0 var(--ink); }
+.an-pin { position: absolute; bottom: calc(1.4rem + var(--f) * 8.4rem); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; animation: x9-drop 0.6s cubic-bezier(0.3, 1.7, 0.5, 1) both; z-index: 2; }
+@keyframes x9-drop { from { transform: translate(-50%, -20rem); opacity: 0; } }
+.an-year { font-family: var(--display); font-size: 1.5rem; background: #fff; color: var(--ink); border: 0.2rem solid var(--ink); border-radius: 0.5rem; padding: 0 0.4rem; margin-bottom: -0.3rem; z-index: 2; }
+.an-pts { font-family: var(--display); font-size: 1.4rem; color: var(--green); -webkit-text-stroke: 0.05em var(--ink); paint-order: stroke fill; animation: pop-in 0.4s 0.3s both; }
+.an-pin.best .avatar { animation: hype-jump 0.5s ease-in-out infinite alternate; }
+.an-pin.bull .an-year { background: var(--yellow); }
+.an-flag { position: absolute; bottom: 0; transform: translateX(-50%); z-index: 3; animation: an-flag 0.8s cubic-bezier(0.3, 1.6, 0.5, 1) both; display: flex; flex-direction: column; align-items: center; }
+@keyframes an-flag { from { transform: translate(-50%, -30rem); } }
+.an-flag-cloth { font-family: var(--display); font-size: 2.4rem; background: var(--red); color: #fff; border: 0.3rem solid var(--ink); border-radius: 0.6rem; padding: 0.1rem 0.8rem; -webkit-text-stroke: 0.04em var(--ink); paint-order: stroke fill; }
+.an-pole { width: 0.5rem; height: 26rem; background: var(--ink); }
+.an-aud { position: absolute; top: 4.4rem; transform: translateX(-50%); font-size: 1.3rem; background: rgba(27, 16, 51, 0.85); padding: 0.1rem 0.6rem; border-radius: 0.5rem; }

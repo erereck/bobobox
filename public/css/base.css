@@ -1,0 +1,133 @@
+/* BOBOBOX — base compartilhada (TV + celular) */
+
+@font-face { font-family: 'Lilita'; src: url('/fonts/lilita-one/lilita-one-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Nunito'; font-weight: 400; src: url('/fonts/nunito/nunito-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Nunito'; font-weight: 600; src: url('/fonts/nunito/nunito-latin-600-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Nunito'; font-weight: 700; src: url('/fonts/nunito/nunito-latin-700-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Nunito'; font-weight: 800; src: url('/fonts/nunito/nunito-latin-800-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Nunito'; font-weight: 900; src: url('/fonts/nunito/nunito-latin-900-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Marker'; src: url('/fonts/permanent-marker/permanent-marker-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Creepster'; src: url('/fonts/creepster/creepster-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Bungee'; src: url('/fonts/bungee/bungee-latin-400-normal.woff2') format('woff2'); font-display: swap; }
+
+:root {
+  --ink: #1b1033;
+  --ink2: #2a1a4a;
+  --paper: #fffdf7;
+  --pink: #ff3d7f;
+  --yellow: #ffd23f;
+  --blue: #2ec4ff;
+  --green: #3ddc84;
+  --orange: #ff8a3d;
+  --purple: #a77bff;
+  --red: #ff5c5c;
+  --gc: var(--pink);
+  --gc2: var(--yellow);
+  --display: 'Lilita', 'Nunito', system-ui, sans-serif;
+  --body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--body);
+  font-weight: 800;
+  color: #fff;
+  background: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+input, textarea { font: inherit; }
+.muted { opacity: 0.6; }
+
+.font-marker { font-family: 'Marker', var(--display) !important; }
+.font-creepster { font-family: 'Creepster', var(--display) !important; letter-spacing: 0.04em; }
+.font-bungee { font-family: 'Bungee', var(--display) !important; }
+
+/* ───────── avatares ───────── */
+.avatar { overflow: visible; display: block; flex: none; }
+.avatar .av-body { transition: transform 0.3s; }
+.avatar.offline { filter: grayscale(1) opacity(0.45); }
+.avatar .antenna { animation: antenna 1.6s ease-in-out infinite; transform-origin: 50px 24px; }
+@keyframes antenna { 50% { transform: rotate(12deg); } }
+
+/* ───────── desenho “se desenhando” ───────── */
+.drawing { display: block; width: 100%; height: 100%; }
+.draw-on { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; animation-name: drawon; animation-timing-function: linear; animation-fill-mode: forwards; }
+@keyframes drawon { 0% { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 1; } }
+
+/* ───────── Bobo, o mascote ───────── */
+.bobo { overflow: visible; }
+.bobo .bobo-body { animation: bobo-idle 2.4s ease-in-out infinite; transform-origin: 100px 180px; }
+.bobo .lid { transform-box: fill-box; }
+.bobo .lid-l { transform-origin: 100% 100%; }
+.bobo .lid-r { transform-origin: 0% 100%; }
+.bobo .mouth-open { opacity: 0; }
+.bobo.talking .mouth-open { animation: mouth 0.24s steps(1) infinite; }
+.bobo.talking .mouth-closed { animation: mouth 0.24s steps(1) infinite reverse; }
+.bobo.talking .lid-l { animation: lid-l 0.48s ease-in-out infinite; }
+.bobo.talking .lid-r { animation: lid-r 0.48s ease-in-out infinite; }
+.bobo.talking .bobo-body { animation: bobo-talk 0.48s ease-in-out infinite; }
+.bobo .bobo-eyes { animation: blink 4.2s infinite; transform-origin: 100px 114px; }
+.bobo-hype .bobo-body, .bobo-party .bobo-body { animation: bobo-hype 0.5s ease-in-out infinite; }
+.bobo-spooky .bobo-body { animation: bobo-float 3s ease-in-out infinite; }
+@keyframes mouth { 0% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes lid-l { 50% { transform: rotate(-14deg); } }
+@keyframes lid-r { 50% { transform: rotate(14deg); } }
+@keyframes bobo-idle { 50% { transform: translateY(-4px) scale(1.01, 0.99); } }
+@keyframes bobo-talk { 25% { transform: scale(1.03, 0.97); } 75% { transform: scale(0.98, 1.03) translateY(-3px); } }
+@keyframes bobo-hype { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-16px) rotate(3deg); } }
+@keyframes bobo-float { 50% { transform: translateY(-10px) rotate(2deg); } }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.08); } }
+
+/* ───────── logo ───────── */
+.logo { display: inline-flex; font-family: var(--display); font-size: calc(4.2rem * var(--s, 1)); line-height: 1; letter-spacing: 0.02em; user-select: none; }
+.logo span {
+  color: var(--c);
+  -webkit-text-stroke: calc(0.09em) var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 0 0.07em 0 var(--ink), 0 0.12em 0 rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  animation: logo-bounce 2.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.09s);
+  transform-origin: 50% 100%;
+}
+@keyframes logo-bounce { 0%, 60%, 100% { transform: translateY(0) rotate(0); } 20% { transform: translateY(-0.18em) rotate(-4deg); } 40% { transform: translateY(0.02em) scale(1.06, 0.94); } }
+
+/* ───────── botões ───────── */
+.btn {
+  font-family: var(--display);
+  font-size: 1.15em;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--yellow);
+  border: 0.18em solid var(--ink);
+  border-radius: 0.8em;
+  padding: 0.55em 1.2em;
+  box-shadow: 0 0.28em 0 var(--ink);
+  transition: transform 0.08s, box-shadow 0.08s, filter 0.15s;
+  user-select: none;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: translateY(0.22em); box-shadow: 0 0.06em 0 var(--ink); }
+.btn:disabled { filter: grayscale(0.8) opacity(0.55); cursor: not-allowed; transform: none; }
+.btn.alt { background: #fff; }
+.btn.pink { background: var(--pink); color: #fff; }
+.btn.blue { background: var(--blue); }
+.btn.green { background: var(--green); }
+.btn.small { font-size: 0.85em; padding: 0.4em 0.9em; }
+.btn.big { font-size: 1.6em; }
+.pulse { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.06); } }
+
+.chip { border: 0.14em solid var(--ink); background: #fff; color: var(--ink); border-radius: 99em; padding: 0.25em 0.8em; font-weight: 900; font-size: 0.9em; }
+.chip.on { background: var(--ink); color: #fff; }
+
+kbd { font-family: var(--body); background: #fff2; border: 1px solid #fff4; border-radius: 0.3em; padding: 0.05em 0.4em; font-size: 0.9em; }
+
+.pop-in { animation: pop-in 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both; }
+@keyframes pop-in { from { transform: scale(0.6) rotate(-3deg); opacity: 0; } }
+.wobble { animation: wobble 1.2s ease-in-out infinite; display: inline-block; }
+@keyframes wobble { 25% { transform: rotate(-10deg) scale(1.05); } 75% { transform: rotate(10deg) scale(0.97); } }
+.blank { display: inline-block; color: var(--gc, var(--pink)); letter-spacing: -0.05em; }

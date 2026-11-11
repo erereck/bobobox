@@ -1,0 +1,48 @@
+/* Batalha de Rima */
+.rm-stage { position: absolute; inset: -1rem -2rem 0; display: grid; grid-template-columns: 26rem 1fr 26rem; align-items: center; }
+.rm-lights { position: absolute; inset: 0; pointer-events: none; background: conic-gradient(from 200deg at 50% -10%, transparent 0 40deg, #ffd23f22 45deg, transparent 50deg 70deg, #a77bff33 75deg, transparent 80deg 100deg, #ff3d7f22 105deg, transparent 110deg); animation: rm-sweep 4s ease-in-out infinite alternate; }
+@keyframes rm-sweep { to { transform: rotate(8deg); } }
+.rm-mc { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; transition: transform 0.4s, filter 0.4s; filter: brightness(0.7) saturate(0.8); }
+.rm-mc.active { filter: none; transform: scale(1.08); }
+.rm-mc.active .rm-av { animation: rm-bounce 0.46s ease-in-out infinite; }
+.rm-mc.active .rm-spot { opacity: 1; }
+@keyframes rm-bounce { 50% { transform: translateY(-1.2rem) rotate(-3deg) scale(1.03, 0.97); } }
+.rm-spot { position: absolute; top: -12rem; left: 50%; width: 30rem; height: 48rem; transform: translateX(-50%); background: radial-gradient(ellipse at 50% 85%, #fff5 0%, transparent 60%); clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.rm-av { position: relative; }
+.rm-av .avatar, .rm-av .bobo { width: 17rem; height: 17rem; }
+.rm-mic { position: absolute; bottom: 1rem; font-size: 5rem; filter: drop-shadow(0 0.3rem 0 rgba(0, 0, 0, 0.4)); }
+.rm-mc.left .rm-mic { right: -2rem; transform: rotate(-20deg); }
+.rm-mc.right .rm-mic { left: -2rem; transform: rotate(20deg) scaleX(-1); }
+.rm-name { font-family: 'Bungee', var(--display); font-size: 2rem; background: var(--pc); color: var(--ink); border: 0.3rem solid var(--ink); border-radius: 0.8rem; padding: 0.1rem 1rem; box-shadow: 0 0.3rem 0 var(--ink); white-space: nowrap; max-width: 26rem; overflow: hidden; text-overflow: ellipsis; }
+.rm-votes { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; font-size: 1.4rem; }
+.rm-votes b { font-family: var(--display); font-size: 2.4rem; color: var(--green); -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; }
+.rm-mc.ko-lose { filter: grayscale(1) brightness(0.5); transform: rotate(8deg) translateY(3rem) scale(0.85); }
+.rm-mc.ko-win { filter: none; transform: scale(1.15); }
+.rm-center { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem; }
+.rm-lyrics { background: rgba(10, 4, 25, 0.82); border: 0.35rem solid var(--purple); border-radius: 1.6rem; padding: 1.4rem 2rem; max-width: 44rem; box-shadow: 0 0 3rem #a77bff66; animation: pop-in 0.35s both; }
+.rm-lyrics.b { border-color: var(--yellow); box-shadow: 0 0 3rem #ffd23f55; }
+.rm-l1, .rm-l2 { font-family: 'Bungee', var(--display); line-height: 1.25; }
+.rm-l1 { font-size: 2.1rem; margin-bottom: 0.8rem; }
+.rm-l2 { font-size: 2.5rem; color: var(--yellow); }
+.rm-l1 span, .rm-l2 span { opacity: 0.35; transition: opacity 0.12s, text-shadow 0.12s; }
+.rm-l1 span.on, .rm-l2 span.on { opacity: 1; text-shadow: 0 0 1.4rem currentColor; }
+.rm-l2 span.rhyme.on { color: var(--pink); display: inline-block; animation: pop-in 0.4s both; }
+.rm-l2.silent { color: #fff8; font-size: 1.8rem; }
+.rm-ready, .rm-ask { font-family: 'Bungee', var(--display); font-size: 3.4rem; text-align: center; text-shadow: 0 0.3rem 0 var(--ink); }
+.rm-ready { animation: pulse 1s infinite; }
+.rm-count { position: absolute; bottom: 6rem; font-size: 1.2rem; opacity: 0.6; }
+.rm-ko { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.rm-ko span { font-family: 'Bungee', var(--display); font-size: 8rem; color: var(--red); -webkit-text-stroke: 0.06em var(--ink); paint-order: stroke fill; text-shadow: 0 0.5rem 0 var(--ink); transform: rotate(-10deg); animation: lavada 0.8s cubic-bezier(0.2, 1.8, 0.4, 1) both; }
+
+.rm-faceoff { position: absolute; inset: -2rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; overflow: hidden; }
+.rm-fo-side { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.rm-fo-side .avatar, .rm-fo-side .bobo { width: 22rem; height: 22rem; }
+.rm-fo-side.left { animation: rm-in-l 0.7s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+.rm-fo-side.right { animation: rm-in-r 0.7s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+@keyframes rm-in-l { from { transform: translateX(-60rem) rotate(-30deg); } }
+@keyframes rm-in-r { from { transform: translateX(60rem) rotate(30deg); } }
+.rm-fo-name { font-family: 'Bungee', var(--display); font-size: 3rem; text-shadow: 0 0.3rem 0 var(--ink); }
+.rm-fo-vs { font-family: 'Bungee', var(--display); font-size: 12rem; color: var(--yellow); -webkit-text-stroke: 0.05em var(--ink); paint-order: stroke fill; text-shadow: 0 0.6rem 0 var(--ink); animation: lavada 0.8s 0.5s cubic-bezier(0.2, 1.8, 0.4, 1) both; }
+.rm-bolt { position: absolute; left: 50%; top: 0; bottom: 0; width: 6rem; margin-left: -3rem; background: var(--yellow); clip-path: polygon(60% 0, 20% 48%, 55% 48%, 30% 100%, 85% 40%, 50% 40%, 80% 0); opacity: 0; animation: rm-flash 0.9s 0.4s ease-out both; z-index: -1; }
+@keyframes rm-flash { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0.15; } }
+.game-rima .mega { font-size: 5.6rem; }

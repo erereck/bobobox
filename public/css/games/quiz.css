@@ -1,0 +1,74 @@
+/* Quiz Macabro */
+.game-quiz .hud-game, .game-quiz .hud-round { font-family: 'Creepster', var(--display); letter-spacing: 0.05em; }
+.game-quiz .intro-title, .game-quiz .rules-head b { color: #b6ff3d; font-family: 'Creepster', var(--display); letter-spacing: 0.04em; }
+.qz-soul { position: relative; display: inline-block; }
+.qz-soul.ghost .avatar { opacity: 0.55; filter: grayscale(0.6) hue-rotate(160deg) brightness(1.3) drop-shadow(0 0 0.8rem #b6ff3d); animation: qz-float 2.6s ease-in-out infinite; }
+@keyframes qz-float { 50% { transform: translateY(-0.6rem); } }
+.qz-ghost-badge { position: absolute; right: -0.6rem; top: -0.6rem; font-size: 1.6rem; }
+.qz-q { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 1.2rem; padding-bottom: 8rem; }
+.qz-qcard { background: #1d1030ee; border: 0.35rem solid #b6ff3d; border-radius: 1.4rem; padding: 1.2rem 2rem; box-shadow: 0 0 3rem #b6ff3d44, 0.5rem 0.5rem 0 #000; max-width: 84rem; margin: 0 auto; text-align: center; }
+.qz-cat { font-family: 'Creepster', var(--display); color: #b6ff3d; font-size: 1.8rem; letter-spacing: 0.06em; }
+.qz-text { font-size: 3rem; line-height: 1.15; }
+.qz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 5rem; }
+.qz-opt { position: relative; display: flex; align-items: center; gap: 1rem; background: #fff; color: var(--ink); border: 0.35rem solid var(--ink); border-left: 1.2rem solid var(--oc); border-radius: 1.2rem; padding: 0.7rem 1rem; box-shadow: 0.4rem 0.4rem 0 #000; font-size: 2.2rem; animation: pop-in 0.45s cubic-bezier(0.2, 1.5, 0.4, 1) both; animation-delay: calc(var(--i) * 0.1s); transition: transform 0.4s, filter 0.4s, opacity 0.4s; min-height: 5.6rem; }
+.qz-letter { font-family: var(--display); font-size: 2.4rem; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: var(--oc); display: grid; place-items: center; border: 0.2rem solid var(--ink); flex: none; }
+.qz-otext { flex: 1; }
+.qz-opt.right { background: #d9ffb0; transform: scale(1.04); box-shadow: 0 0 2rem #b6ff3d, 0.4rem 0.4rem 0 #000; }
+.qz-opt.wrong { opacity: 0.55; filter: grayscale(0.6); }
+.qz-who { display: flex; gap: 0.2rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; max-width: 50%; }
+.qz-who em { font-style: normal; font-size: 1.1rem; }
+.qz-money { position: absolute; left: 11rem; right: 2rem; bottom: 0; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+.qz-m { display: flex; flex-direction: column; align-items: center; font-size: 1rem; transition: opacity 0.3s; }
+.qz-m.pending { opacity: 0.5; }
+.qz-m-name { max-width: 7rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qz-m b { font-family: var(--display); font-weight: 400; font-size: 1.3rem; color: #b6ff3d; }
+.qz-m.ghost b { color: #9ef0ff; }
+
+.qz-torture { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding-bottom: 6rem; }
+.qz-thead { text-align: center; }
+.qz-tlabel { font-family: var(--display); color: #ff5c5c; font-size: 1.8rem; letter-spacing: 0.3em; animation: qz-flicker 2.2s infinite; }
+@keyframes qz-flicker { 0%, 100%, 42%, 46% { opacity: 1; } 44% { opacity: 0.2; } 70% { opacity: 0.8; } }
+.qz-tname { font-size: 7rem; line-height: 1; margin: 0; color: #b6ff3d; text-shadow: 0 0 2rem #b6ff3d88, 0 0.4rem 0 #000; font-weight: 400; animation: pop-in 0.6s both; }
+.qz-victims { display: flex; gap: 2.4rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.qz-victim { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; animation: pop-in 0.5s both; }
+.qz-victim.chained .avatar { animation: qz-shake 0.25s linear infinite; }
+@keyframes qz-shake { 25% { transform: translate(0.2rem, -0.1rem) rotate(2deg); } 75% { transform: translate(-0.2rem, 0.1rem) rotate(-2deg); } }
+.qz-victim.chained::after { content: '⛓️'; font-size: 3rem; margin-top: -2.6rem; }
+.qz-vname { font-size: 1.6rem; background: var(--pc); color: var(--ink); border: 0.2rem solid var(--ink); border-radius: 0.5rem; padding: 0 0.6rem; }
+.qz-verdict { font-family: var(--display); font-size: 2.2rem; animation: stamp 0.5s cubic-bezier(0.2, 1.8, 0.4, 1) both; animation-delay: 0.6s; }
+.qz-victim.died .qz-verdict { color: #ff5c5c; }
+.qz-victim.lived .qz-verdict { color: #b6ff3d; }
+.qz-victim.died .avatar { animation: qz-die 1.4s ease-in both; }
+@keyframes qz-die { 0% { filter: none; opacity: 1; transform: none; } 30% { transform: rotate(-15deg) scale(1.1); filter: brightness(2); } 100% { opacity: 0.55; filter: grayscale(0.6) hue-rotate(160deg) brightness(1.3); transform: translateY(-1rem); } }
+.qz-victim small { font-size: 1.2rem; opacity: 0.85; }
+.qz-cups { display: flex; gap: 2rem; justify-content: center; margin-top: 1rem; }
+.qz-cup { position: relative; display: flex; flex-direction: column; align-items: center; animation: pop-in 0.5s both; animation-delay: calc(var(--i) * 0.12s); }
+.qz-goblet { font-size: 8rem; filter: drop-shadow(0 0.5rem 0 #000); animation: qz-float 3s ease-in-out infinite; animation-delay: calc(var(--i) * 0.3s); }
+.qz-cupn { font-family: var(--display); font-size: 2rem; background: #fff; color: var(--ink); border-radius: 50%; width: 3rem; height: 3rem; display: grid; place-items: center; border: 0.2rem solid var(--ink); }
+.qz-cup.poison .qz-goblet { filter: drop-shadow(0 0 2rem #b6ff3d) hue-rotate(80deg); }
+.qz-skull { position: absolute; top: 3rem; font-size: 4rem; animation: stamp 0.5s both; }
+.qz-drinkers { display: flex; gap: 0.2rem; min-height: 3rem; }
+.qz-mem { flex: 1; display: grid; place-items: center; }
+.qz-sym { width: 22rem; height: 22rem; border-radius: 3rem; background: var(--sc); border: 0.6rem solid var(--ink); display: grid; place-items: center; font-size: 14rem; box-shadow: 0 0 5rem var(--sc); animation: pop-in 0.3s cubic-bezier(0.2, 1.8, 0.4, 1) both; }
+.qz-sym.empty { background: #ffffff10; box-shadow: none; color: #ffffff30; font-family: var(--display); }
+.qz-seq { font-size: 2rem; display: flex; gap: 0.6rem; align-items: center; }
+.qz-seq span { width: 4.4rem; height: 4.4rem; border-radius: 1rem; background: var(--sc); border: 0.25rem solid var(--ink); display: grid; place-items: center; font-size: 2.6rem; }
+
+.qz-final { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding-top: 0.5rem; }
+.qz-title { color: #b6ff3d; font-weight: 400; text-shadow: 0 0 2rem #b6ff3d88, 0 0.4rem 0 #000; -webkit-text-stroke: 0; }
+.qz-fq { text-align: center; }
+.qz-fcat { font-size: 2.8rem; background: #1d1030ee; border: 0.3rem solid #b6ff3d; border-radius: 1.2rem; padding: 0.4rem 1.6rem; margin-bottom: 0.8rem; }
+.qz-fitems { display: flex; gap: 1rem; justify-content: center; }
+.qz-fitem { font-size: 2.2rem; background: #fff; color: var(--ink); border: 0.3rem solid var(--ink); border-radius: 1rem; padding: 0.5rem 1.4rem; box-shadow: 0.3rem 0.3rem 0 #000; animation: pop-in 0.4s both; animation-delay: calc(var(--i) * 0.12s); }
+.qz-fitem.ok { background: #b6ff3d; }
+.qz-fitem.no { background: #ff8c8c; text-decoration: line-through; opacity: 0.8; }
+.qz-track { position: relative; width: 86rem; height: 16rem; margin-top: auto; margin-bottom: 7rem; }
+.qz-hall { position: absolute; left: -2rem; right: -2rem; bottom: 0; height: 5rem; display: grid; grid-template-columns: repeat(11, 1fr); background: linear-gradient(#2a1745, #140a24); border: 0.3rem solid #000; border-radius: 1rem; overflow: hidden; }
+.qz-cell { border-right: 0.15rem dashed #ffffff22; display: grid; place-items: center; font-family: var(--display); font-size: 1.6rem; color: #ffffff55; }
+.qz-cell.door { background: #3d2408; font-size: 3.6rem; border: none; box-shadow: inset 0 0 2rem #ffd23f88; }
+.qz-runner { position: absolute; bottom: calc(4rem + var(--stack) * 3.2rem); transform: translateX(-50%); transition: left 1.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: calc(10 - var(--stack)); }
+.qz-runner.winner .avatar { animation: hype-jump 0.5s ease-in-out infinite alternate; }
+.qz-move { position: absolute; top: -1.6rem; right: -1.6rem; font-family: var(--display); font-size: 1.6rem; color: #b6ff3d; animation: pop-in 0.4s 1.2s both; -webkit-text-stroke: 0.05em #000; paint-order: stroke fill; }
+.qz-swap { position: absolute; bottom: 1rem; font-family: 'Creepster', var(--display); font-size: 3rem; color: #9ef0ff; text-shadow: 0 0 1.4rem #9ef0ff; }
+/* a pista da fuga não pode ficar atrás do mascote */
+.qz-final .qz-track { width: 78rem; align-self: flex-end; margin-right: 2rem; }
