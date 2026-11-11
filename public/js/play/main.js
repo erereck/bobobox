@@ -117,6 +117,7 @@ function JoinScreen() {
   return html`<form class="join" onSubmit=${go}>
     <div class="join-bobo"><${Bobo} size=${130} mood="party" /></div>
     <${Logo} size=${0.9} />
+    <small class="studio-credit">EriLab™ / Erick Luiz</small>
     ${a.kicked ? html`<div class="join-err">${a.kicked}</div>` : null}
     <label class="field">
       <span>Código da sala</span>
