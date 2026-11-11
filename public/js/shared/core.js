@@ -1,8 +1,25 @@
 // Núcleo do cliente: socket, relógio sincronizado e uma store minúscula.
-/* global io */
 import { useEffect, useState, useRef } from '/vendor/preact.js';
 
-export const socket = io({ reconnectionDelayMax: 2500 });
+/**
+ * Dois jeitos de rodar:
+ *  - 'server' (npm start): um servidor Node com Socket.IO segura as salas.
+ *  - 'p2p' (site estático, ex.: Vercel): a TV roda o jogo e os celulares conectam nela por WebRTC.
+ * O modo vem de /config.js.
+ */
+export const MODE = window.BOBO?.mode === 'p2p' ? 'p2p' : 'server';
+const isTV = ['/tv', '/tv/', '/tv.html'].includes(location.pathname);
+
+async function makeSocket() {
+  if (MODE === 'p2p') {
+    const p2p = await import('./p2p.js');
+    return isTV ? p2p.createHostSocket() : p2p.createPhoneSocket();
+  }
+  const { io } = await import('/socket.io/socket.io.esm.min.js');
+  return io({ reconnectionDelayMax: 2500 });
+}
+
+export const socket = await makeSocket();
 
 // ───────── relógio sincronizado com o servidor ─────────
 let offset = 0;

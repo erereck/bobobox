@@ -1,9 +1,22 @@
 // Lobby da TV: QR code, jogadores chegando, catálogo de jogos e configurações.
-import { html, useState, useEffect } from '/vendor/preact.js';
+import { html, useState, useEffect, useMemo } from '/vendor/preact.js';
+import qrcode from '/vendor/qrcode.mjs';
 import { cls } from '../shared/core.js';
 import { Avatar, Logo } from '../shared/art.js';
 import { audio } from '../shared/audio.js';
 import { narratorEnabled, setNarrator, voiceName } from './narrator.js';
+
+/** QR code gerado no próprio navegador (funciona igual no servidor local e no site estático). */
+function QrCode({ text }) {
+  const src = useMemo(() => {
+    const qr = qrcode(0, 'M');
+    qr.addData(text);
+    qr.make();
+    const svg = qr.createSvgTag({ cellSize: 8, margin: 2, scalable: true });
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  }, [text]);
+  return html`<img src=${src} alt="QR code pra entrar" />`;
+}
 
 export function Lobby({ s, catalog, joinUrl, send }) {
   const [settings, setSettings] = useState(false);
@@ -28,7 +41,7 @@ export function Lobby({ s, catalog, joinUrl, send }) {
     <div class="lobby-main">
       <div class=${cls('join-card', hide && !peek && 'hidden-code')}>
         <div class="jc-title">Escaneia e entra!</div>
-        <div class="jc-qr">${joinUrl ? html`<img src=${`/api/qr.svg?u=${encodeURIComponent(joinUrl)}`} alt="QR code pra entrar" />` : null}</div>
+        <div class="jc-qr">${joinUrl ? html`<${QrCode} text=${joinUrl} />` : null}</div>
         <div class="jc-or">ou acessa no celular</div>
         <div class="jc-url">${host}</div>
         <div class="jc-code-label">código da sala</div>

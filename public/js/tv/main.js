@@ -1,6 +1,6 @@
 // BOBOBOX — tela principal (TV).
 import { html, render, useEffect, useRef, useState } from '/vendor/preact.js';
-import { socket, createStore, useStore, cls } from '../shared/core.js';
+import { socket, createStore, useStore, cls, MODE } from '../shared/core.js';
 import { Bobo, Logo } from '../shared/art.js';
 import { audio } from '../shared/audio.js';
 import { speak, unlockVoice, stopSpeaking } from './narrator.js';
@@ -22,6 +22,7 @@ const saved = (() => {
 })();
 
 async function joinBase() {
+  if (MODE === 'p2p') return location.origin; // site estático: os celulares entram pelo mesmo endereço
   try {
     const info = await fetch('/api/info').then((r) => r.json());
     if (info.publicUrl) return info.publicUrl.replace(/\/$/, '');

@@ -1,9 +1,18 @@
 // Utilitários compartilhados do servidor.
-import { randomBytes } from 'node:crypto';
+// Aleatoriedade forte tanto no Node quanto no navegador (o motor também roda na TV no modo online).
+const nodeCrypto = typeof process !== 'undefined' && process.versions?.node && !globalThis.crypto?.getRandomValues ? await import('node:crypto') : null;
+function randomBytes(n) {
+  const out = new Uint8Array(n);
+  if (globalThis.crypto?.getRandomValues) globalThis.crypto.getRandomValues(out);
+  else if (nodeCrypto) nodeCrypto.randomFillSync(out);
+  else for (let i = 0; i < n; i++) out[i] = Math.floor(Math.random() * 256);
+  return out;
+}
+const ID_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
 export const rand = (n) => Math.floor(Math.random() * n);
 export const pick = (arr) => arr[rand(arr.length)];
-export const uid = (n = 10) => randomBytes(n).toString('base64url').slice(0, n);
+export const uid = (n = 10) => Array.from(randomBytes(n), (b) => ID_CHARS[b & 63]).join('');
 export const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 export function shuffle(arr) {

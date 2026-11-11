@@ -20,6 +20,10 @@ app.disable('x-powered-by');
 
 const nm = (...p) => path.join(ROOT, 'node_modules', ...p);
 app.get('/vendor/preact.js', (_req, res) => res.type('js').sendFile(nm('htm', 'preact', 'standalone.module.js')));
+app.get('/vendor/qrcode.mjs', (_req, res) => res.type('js').sendFile(nm('qrcode-generator', 'dist', 'qrcode.mjs')));
+app.get('/vendor/peerjs.min.js', (_req, res) => res.type('js').sendFile(nm('peerjs', 'dist', 'peerjs.min.js')));
+// Modo do cliente: aqui tem servidor, então Socket.IO (no site estático da Vercel o build gera mode: 'p2p')
+app.get('/config.js', (_req, res) => res.type('js').set('Cache-Control', 'no-store').send("window.BOBO = { mode: 'server' };\n"));
 for (const f of ['lilita-one', 'nunito', 'permanent-marker', 'creepster', 'bungee']) {
   app.use(`/fonts/${f}`, express.static(nm('@fontsource', f, 'files'), { maxAge: '7d', immutable: true }));
 }

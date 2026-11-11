@@ -15,7 +15,6 @@ const REACTIONS = ['😂', '🔥', '😱', '👏', '💀', '🤡', '😍', '🤔
 export class Room {
   constructor(mgr, code) {
     this.mgr = mgr;
-    this.io = mgr.io;
     this.code = code;
     this.hostToken = uid(16);
     this.hostSocket = null;
@@ -247,8 +246,10 @@ export class Room {
     const d = sanitizeDrawing(drawing);
     p.avatar = d.s.length ? d : null;
     p.av++;
-    this.io.to(`room:${this.code}`).emit('avatars', { [p.id]: { av: p.av, d: p.avatar } });
-    this.hostSocket?.emit('avatars', { [p.id]: { av: p.av, d: p.avatar } });
+    const payload = { [p.id]: { av: p.av, d: p.avatar } };
+    for (const x of this.players.values()) x.socket?.emit('avatars', payload);
+    for (const x of this.audience.values()) x.socket?.emit('avatars', payload);
+    this.hostSocket?.emit('avatars', payload);
     this.changed();
   }
 

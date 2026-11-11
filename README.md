@@ -55,9 +55,24 @@ Atalhos na TV: **Espaço** pula · **P** pausa · **F** tela cheia · **M** mudo
 | `PUBLIC_URL` | — | URL pública usada no QR code (ex.: quando hospedado na internet) |
 | `BOBO_TIMESCALE` | `1` | Acelera/desacelera todos os tempos (testes) |
 
-### Jogar pela internet
+### Jogar pela internet (Vercel ou qualquer hospedagem estática)
 
-O Bobobox é um servidor Node comum (Express + Socket.IO), então roda em qualquer lugar que aceite WebSocket — Render, Railway, Fly.io, uma VPS… Defina `PUBLIC_URL` com o endereço final pro QR code apontar certo.
+O Bobobox tem um **modo online sem servidor**: a TV vira a anfitriã (roda o jogo no próprio navegador) e cada celular se conecta direto nela por **WebRTC**, usando o [PeerJS](https://peerjs.com) só pra TV e celulares se encontrarem. Dá pra jogar com gente em qualquer lugar, sem precisar estar no mesmo Wi-Fi.
+
+```bash
+npm run build            # gera o site estático em dist/
+npm run preview:online   # testa local em http://localhost:4173/tv
+npm run test:online      # partida automática de ponta a ponta (precisa de internet)
+```
+
+**Vercel:** importe o repositório em [vercel.com/new](https://vercel.com/new) — o `vercel.json` já diz tudo (`npm run build` → `dist/`). Cada push na `main` publica sozinho. Abra `https://<seu-projeto>.vercel.app/tv` na TV; os celulares entram pelo QR code.
+
+Cuidados do modo online:
+- **Não recarregue a TV** no meio da partida: a sala mora nela (o navegador avisa antes).
+- Deixe a aba da TV **visível** (abas em segundo plano ficam lentas).
+- Redes muito restritas podem bloquear WebRTC. Dá pra usar seus próprios servidores TURN no build: `BOBO_ICE='[{"urls":"turn:…","username":"…","credential":"…"}]' npm run build`.
+
+O modo servidor (`npm start`) continua funcionando igual — e também roda em qualquer host Node com WebSocket (Render, Railway, Fly.io…; defina `PUBLIC_URL`).
 
 ## Testes
 

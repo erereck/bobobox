@@ -1,6 +1,6 @@
 // BOBOBOX — controle (celular).
 import { html, render, useEffect, useRef, useState } from '/vendor/preact.js';
-import { socket, createStore, useStore, cls, fmt, vibrate, timerLeft, useTick, playerById } from '../shared/core.js';
+import { socket, createStore, useStore, cls, fmt, vibrate, timerLeft, useTick, playerById, MODE } from '../shared/core.js';
 import { Avatar, Bobo, Logo } from '../shared/art.js';
 import { RequestView } from './inputs.js';
 import { DrawPad, saveDrawingPng } from './canvas.js';
@@ -24,7 +24,15 @@ const saveSession = (s) => {
 const app = createStore({ joined: null, state: null, catalog: [], toast: null, kicked: null, connected: socket.connected });
 
 // ───────── conexão ─────────
-function join({ code, name, token, asAudience }, cb) {
+async function join({ code, name, token, asAudience }, cb) {
+  // Modo online: primeiro acha a TV desse código na rede P2P
+  if (socket.connectTo) {
+    try {
+      await socket.connectTo(code);
+    } catch (e) {
+      return cb?.({ error: e.message });
+    }
+  }
   socket.emit('join', { code, name, token, asAudience }, (res) => {
     if (res?.ok) {
       app.set((a) => ({ ...a, joined: { code: res.code, id: res.id, audience: !!res.audience }, catalog: res.catalog ?? a.catalog, kicked: null }));
@@ -130,7 +138,7 @@ function JoinScreen() {
     ${err ? html`<div class="join-err">${err}</div>` : null}
     <button class="btn big pink" type="submit" disabled=${code.length !== 4 || !name.trim() || busy}>${busy ? 'Entrando…' : 'ENTRAR ➜'}</button>
     <button class="linkish" type="button" onClick=${(e) => go(e, true)} disabled=${code.length !== 4 || !name.trim()}>ou entrar só na plateia 👥</button>
-    ${!a.connected ? html`<div class="muted small">conectando ao servidor…</div>` : null}
+    ${!a.connected && MODE === 'server' ? html`<div class="muted small">conectando ao servidor…</div>` : null}
   </form>`;
 }
 
@@ -333,9 +341,12 @@ function App() {
   const c = (params.get('c') ?? '').toUpperCase();
   if (sess?.token && (!c || c === sess.code)) {
     const tryJoin = () => join({ code: sess.code, token: sess.token, name: sess.name });
-    if (socket.connected) tryJoin();
+    if (socket.connected || socket.connectTo) tryJoin();
     else socket.once('connect', () => !app.get().joined && tryJoin());
   }
 })();
+
+// Atalho de depuração/testes no console do navegador
+window.__bobo = { socket, app };
 
 render(html`<${App} />`, document.getElementById('app'));
